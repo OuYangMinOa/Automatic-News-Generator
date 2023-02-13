@@ -28,6 +28,11 @@ def test_proxies_audio():
 
     assert os.path.isfile(test_audio_path)
 
+    p.delete_proxy_file(Proxy_file)
+
+    assert (not os.path.isfile(Proxy_file))
+
+
 
 
 def test_build_video():

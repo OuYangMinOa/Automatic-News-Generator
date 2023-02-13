@@ -5,7 +5,7 @@ import numpy as np
 import glob
 import os
 
-change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.0-Q16-HDRI\\magick.exe"})
+# change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.0-Q16-HDRI\\magick.exe"})
 
 def build_video(text_cont  = ""   , 
                 song_path  = ""   ,
@@ -15,7 +15,8 @@ def build_video(text_cont  = ""   ,
                 fps        = 60   ,
                 color      = 'white', 
                 fontsize   = 25   ,
-                image_path = None ):
+                image_path = None ,
+                encoding   = ""): # 
 
     # 創建函數 make_frame 用於創建影格
     def make_frame(t):
@@ -28,7 +29,7 @@ def build_video(text_cont  = ""   ,
     # 創建影片
     clip = VideoClip(make_frame, duration=audio.duration)
     clip.fps = fps
-    clip.write_videofile(save_path, verbose=False, logger=None ,codec='h264_nvenc')  # h264_qsv   h264_nvenc
+    clip.write_videofile(save_path, verbose=False, logger=None)  # h264_qsv   h264_nvenc
 
     if (image_path):
         is_title_clip = False
@@ -79,7 +80,7 @@ def build_video(text_cont  = ""   ,
     video = CompositeVideoClip([clip, txt])
 
     # 輸出成檔案
-    video.write_videofile(save_path, verbose=False, logger=None,codec='h264_nvenc')
+    video.write_videofile(save_path, verbose=False, logger=None)
     
     return audio.duration
 
@@ -88,7 +89,7 @@ def combined_all_video(video_arr,save_path=""):
     for i in video_arr:
         clips.append(VideoFileClip(i))
     video = concatenate_videoclips(clips)
-    video.write_videofile(save_path, verbose=False, logger=None,codec='h264_nvenc')
+    video.write_videofile(save_path, verbose=False, logger=None)
 
 def get_video_time(save_path):
     video = VideoFileClip(save_path)

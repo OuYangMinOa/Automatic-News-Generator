@@ -1,7 +1,9 @@
 ## openai
 import openai
 from utils.MyLog import logger
-
+import dotenv
+import os
+dotenv.load_dotenv()
 
 my_keys = eval(os.getenv("OPENAI_TOKEN"))
 openai.api_key = my_keys[key_index]

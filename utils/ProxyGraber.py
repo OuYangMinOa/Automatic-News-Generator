@@ -56,7 +56,7 @@ class proxies:
         self.pro.close()
         self.unverify_proxy = []
 
-    def save_proxy(self,path):
+    def save_proxy(self,path=Proxy_file):
         if (os.path.isfile(path)):
             proxies_arr =  np.load(path)
             new_arr     = np.append(proxies_arr, self.proxy_list)
@@ -66,6 +66,9 @@ class proxies:
             self.proxy_list = new_arr
         else:
             np.save(path, np.array(self.proxy_list))
+    def delete_proxy_file(self, path=Proxy_file):
+        if (os.path.isfile(path)):
+            os.remove(Proxy_file)
 
     def get_proxies(self):
         host, port = [], []
@@ -99,4 +102,4 @@ class proxies:
 if (__name__ == '__main__'):
     p = proxies()
     p.verify_proxy()
-    p.save_proxy(Proxy_file)
+    p.save_proxy()

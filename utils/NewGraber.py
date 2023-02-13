@@ -1,4 +1,4 @@
-# Grab news
+# NewGraber.py
 from datetime import datetime,timedelta
 from bs4      import BeautifuSoup
 
@@ -41,7 +41,7 @@ def build_floder():
     return save_floder,last_day_floder
 
 
-def spider():
+def GrabChineseNews():
     '''
     Grab your news here
     '''
@@ -49,14 +49,18 @@ def spider():
     save_floder, last_day_floder = build_floder()
 
 
+    assert False , "Build your own carl in utils/NewGraber.py"
+
 
 
    for title_, this_new_Content in grab_result:
         # this_url : your carl website
 
-        this_floder = os.path.join(save_floder,os.path.basename(this_url))  #  your carl website
-        text_path   = os.path.join(this_floder,"word.txt")
-        title_path  = os.path.join(this_floder,"title.txt")
+        this_floder  = os.path.join(save_floder,os.path.basename(this_url))  #  your carl website
+        text_path    = os.path.join(this_floder,"word.txt")
+        title_path   = os.path.join(this_floder,"title.txt")
+        image_folder = os.path.join(this_floder,"images")
+
 
         word = "Please summarize the text below and provide a brief verbal press release:\n" + this_new_Content
         print("\tword length :",len(word))
@@ -80,7 +84,44 @@ def spider():
 
 
 
+def GrabEnglishNews():
+    '''
+    Grab your news here
+    '''
 
+    save_floder, last_day_floder = build_floder()
+
+    assert False , "Build your own carl in utils/NewGraber.py"
+
+
+
+   for title_, this_new_Content in grab_result:
+        # this_url : your carl website
+
+        this_floder  = os.path.join(save_floder,os.path.basename(this_url))  #  your carl website
+        text_path    = os.path.join(this_floder,"word.txt")
+        title_path   = os.path.join(this_floder,"title.txt")
+        image_folder = os.path.join(this_floder,"images")
+
+
+        word = "Please summarize the text below and provide a brief verbal press release:\n" + this_new_Content
+        print("\tword length :",len(word))
+        this_new_Content = prompt_openai(word)
+
+        print(this_new_Content,"\n\tLength :",len(this_new_Content))
+        with open(text_path,'w',encoding="utf8") as f:
+            f.write(this_new_Content)
+
+        with open(title_path,'w',encoding="utf8") as f:
+            f.write( title_)
+        print("="*50)
+
+        time.sleep(20)
+
+
+   all_news_floders = []   #  all news folder in this arr
+
+   return save_floder, all_news_floders
 
 
 

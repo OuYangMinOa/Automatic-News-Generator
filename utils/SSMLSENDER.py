@@ -1,3 +1,4 @@
+#  SSMLSENDER
 from datetime import datetime
 
 import websocket as websoc
@@ -7,6 +8,11 @@ import asyncio
 import time
 import re
 import uuid
+
+import dotenv
+import os
+
+dotenv.load_dotenv()
 
 
 def hr_cr(hr):
@@ -29,8 +35,16 @@ def getXTime():
 
 # Async function for actually communicating with the websocket
 def transferMsTTSData(SSML_text, outputPath,host, port):
+
     req_id = uuid.uuid4().hex.upper()
-    endpoint2 = f"wss://eastus.api.speech.microsoft.com/cognitiveservices/websocket/v1?TrafficType=AzureDemo&Authorization=bearer%20undefined&X-ConnectionId={req_id}"
+
+    #  Search : Microsoft wss ttx
+
+    endpoint2 = f"{os.getenv('WSSURL')}={req_id}"
+
+
+
+
     websocket = websoc.create_connection(endpoint2,http_proxy_host=host, http_proxy_port=port)
     payload_1 = '{"context":{"system":{"name":"SpeechSDK","version":"1.12.1-rc.1","build":"JavaScript","lang":"JavaScript","os":{"platform":"Browser/Linux x86_64","name":"Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0","version":"5.0 (X11)"}}}}'
     message_1 = 'Path : speech.config\r\nX-RequestId: ' + req_id + '\r\nX-Timestamp: ' + \

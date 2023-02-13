@@ -14,16 +14,15 @@ This project is develop base on [python](https://www.python.org). Python3 is req
     ```
 2. Add personal token 
 
-	add your token in `.env`
+	Add token in `.env`
 
-3. costomize `utils/NewGraber.py`
-
-    Use crawlers to crawl the content you want
-
-4. Activate virtual environment and run
-    ```shell
-    pipenv shell
-    python3 main.py
-    ```
-
+3. Install ImageMagick
     
+    For linux : sudo apt install imagemagick
+
+    For windows : [url](https://imagemagick.org/script/download.php)
+
+4. costomize `utils/NewGraber.py` : Use crawlers to crawl the content and the image,
+
+5. Costomize `utils/NewGenerator.py` : Add Fixed clips 
+
