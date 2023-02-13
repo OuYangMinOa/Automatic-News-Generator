@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gitpython = "*"
+numpy = "*"
+requests = "*"
+beautifulsoup4 = "*"
+python-dotenv = "*"
+pytest = "*"
+simple-youtube-api = "*"
+openai = "*"
+websocket-client = "*"
+moviepy = "*"
+
+[dev-packages]
