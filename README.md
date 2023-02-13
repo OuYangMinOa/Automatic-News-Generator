@@ -16,8 +16,14 @@ This project is develop base on [python](https://www.python.org). Python3 is req
 
 	add your token in `.env`
 
+3. costomize `utils/NewGraber.py`
+
+    Use crawlers to crawl the content you want
+
 4. Activate virtual environment and run
     ```shell
     pipenv shell
     python3 main.py
     ```
+
+    

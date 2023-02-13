@@ -4,13 +4,15 @@ from bs4      import BeautifuSoup
 
 
 from urllib.request import urlretrieve, Request, urlopen, quote
+from utils.Openai   import prompt_openai
 from utils.info     import News_folder
 
+
 import requests as rq
-import os
-import json
 import openai
+import json
 import time
+import os
 
 
 def remove_num_comma(word):
@@ -41,19 +43,37 @@ def build_floder():
 
 def spider():
     '''
-    Your spider that grab news here
+    Grab your news here
     '''
 
     save_floder, last_day_floder = build_floder()
-    headers={'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
-   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-   'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-   'Accept-Encoding': 'none',
-   'Accept-Language': 'en-US,en;q=0.8',
-   'Connection': 'keep-alive'}
 
 
-   all_news_floders = []   #  all news in this video
+
+
+   for title_, this_new_Content in grab_result:
+        # this_url : your carl website
+
+        this_floder = os.path.join(save_floder,os.path.basename(this_url))  #  your carl website
+        text_path   = os.path.join(this_floder,"word.txt")
+        title_path  = os.path.join(this_floder,"title.txt")
+
+        word = "Please summarize the text below and provide a brief verbal press release:\n" + this_new_Content
+        print("\tword length :",len(word))
+        this_new_Content = prompt_openai(word)
+
+        print(this_new_Content,"\n\tLength :",len(this_new_Content))
+        with open(text_path,'w',encoding="utf8") as f:
+            f.write(this_new_Content)
+
+        with open(title_path,'w',encoding="utf8") as f:
+            f.write( title_)
+        print("="*50)
+
+        time.sleep(20)
+
+
+   all_news_floders = []   #  all news folder in this arr
 
    return save_floder, all_news_floders
 
